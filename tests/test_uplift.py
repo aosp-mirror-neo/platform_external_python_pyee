@@ -71,11 +71,8 @@ def test_uplift_emit():
     # Quick check for unwrap
     unwrap(uplifted_ee)
 
-    with pytest.raises(AttributeError):
-        cast(Any, uplifted_ee).unwrap  # noqa
-
-    with pytest.raises(AttributeError):
-        cast(Any, base_ee).unwrap  # noqa
+    assert not hasattr(uplifted_ee, "unwrap")
+    assert not hasattr(base_ee, "unwrap")
 
     assert not uplifted_ee.emit("base_event")
     assert uplifted_ee.emit("shared_event")
